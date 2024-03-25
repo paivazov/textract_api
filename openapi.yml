@@ -1,0 +1,84 @@
+openapi: 3.0.0
+
+info:
+  title: File Extraction API
+  version: 1.0.0
+
+paths:
+  /files:
+    post:
+      summary: Request text extraction from files
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                callback_url:
+                  type: string
+      responses:
+        '200':
+          description: Successfully initiated text extraction
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: object
+                    properties:
+                      file_id:
+                        type: string
+                      callback_url:
+                        type: string
+                      upload_url:
+                        type: string
+        '500':
+          description: Server error of creating upload url
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: object
+                    properties:
+                      detail:
+                        type: string
+  /files/{file_id}:
+    get:
+      summary: Retrieve information about text extraction for a file
+      parameters:
+        - in: path
+          name: file_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved extracted text
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: object
+                    properties:
+                      file_id:
+                        type: string
+                      text:
+                        type: string
+        '404':
+          description: Extracted text by given id is not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  body:
+                    type: object
+                    properties:
+                      detail:
+                        type: string
