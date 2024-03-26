@@ -13,7 +13,7 @@ with next request body:
     "callback_url": "some_url.com"
 }
 ```
-After proceeding text extraction, API will send resulted text and id of uploaded file to callback_url 
+After proceeding text extraction, API will send resulted text and id of uploaded file on callback_url 
 
 ### To get text using file_id:
 ```shell
